@@ -1,6 +1,6 @@
-# {{APP_NAME}}
+# MIH3O5sLMXx
 
-- **Application Name:** {{APP_NAME}}
-- **Frontend Repository:** `{{FRONTEND_REPO}}`
-- **Live Pages URL:** [{{LIVE_URL}}]({{LIVE_URL}})
+- **Application Name:** MIH3O5sLMXx
+- **Frontend Repository:** `MIH3O5sLMXx_Frontend`
+- **Live Pages URL:** [https://aviv-cyber.github.io/MIH3O5sLMXx_Frontend/](https://aviv-cyber.github.io/MIH3O5sLMXx_Frontend/)
 - **Architecture:** VaultDB (AES-GCM Encrypted Endpoint + Cloudflare Worker Proxy)
