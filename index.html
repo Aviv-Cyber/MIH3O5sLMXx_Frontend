@@ -361,125 +361,40 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-800/80 pb-5">
                 <div>
                     <div class="flex items-center gap-2.5">
-                        <h1 id="docs-header-title" class="text-xl sm:text-2xl font-bold tracking-tight text-white">Docs — מדריך ארכיטקטורה (README.md)</h1>
-                        <span dir="ltr" class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-300 border border-sky-500/25">AI Context Ready</span>
+                        <h1 id="docs-header-title" class="text-xl sm:text-2xl font-bold tracking-tight text-white">Docs (README.md)</h1>
+                        <span id="docs-sync-status-badge" dir="ltr" class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-zinc-900 text-zinc-400 border border-zinc-800">GitHub_Automation_Studio_Backend</span>
                     </div>
-                    <p id="docs-header-subtitle" class="text-xs sm:text-sm text-zinc-400 mt-1">תיעוד מלא של AutoGit, התצורות, זרימת הנתונים וה-API — מסונכרן פיזית אל <span dir="ltr" class="font-mono text-zinc-300">GitHub_Automation_Studio_Backend/README.md</span>.</p>
+                    <p id="docs-header-subtitle" class="text-xs sm:text-sm text-zinc-400 mt-1">נמשך דינמית מתוך <span dir="ltr" class="font-mono text-zinc-300">GitHub_Automation_Studio_Backend/README.md</span>.</p>
                 </div>
                 <div id="docs-actions-container" class="flex flex-wrap items-center gap-2 transition-all duration-700 blur-md opacity-40 pointer-events-none select-none">
+                    <button type="button" id="refresh-docs-btn" class="bg-zinc-900 hover:bg-zinc-800 text-zinc-200 text-xs font-medium px-3.5 py-2 rounded-full border border-zinc-800 transition-colors">
+                        רענן מה-Backend
+                    </button>
                     <button type="button" id="toggle-docs-raw-btn" class="bg-zinc-900 hover:bg-zinc-800 text-zinc-200 text-xs font-medium px-3.5 py-2 rounded-full border border-zinc-800 transition-colors">
-                        הצג Markdown גולמי
+                        ערוך Markdown
                     </button>
                     <button type="button" id="copy-docs-md-btn" class="bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-medium px-3.5 py-2 rounded-full border border-zinc-700 transition-colors">
-                        העתק README.md ל-AI
-                    </button>
-                    <button type="button" id="sync-docs-backend-btn" class="bg-apple-blue hover:bg-apple-blueHover text-white text-xs font-medium px-4 py-2 rounded-full transition-colors">
-                        שמור ב-Backend
+                        העתק ל-AI
                     </button>
                 </div>
             </div>
 
             <div id="docs-content-container" class="space-y-5 transition-all duration-700 blur-md opacity-40 pointer-events-none select-none">
-                <!-- Raw Markdown View (Toggleable) -->
-                <div id="docs-raw-wrapper" class="hidden space-y-2">
+                <!-- Editable Raw Markdown View (Toggleable) -->
+                <div id="docs-raw-wrapper" class="hidden space-y-2.5">
                     <div class="flex items-center justify-between text-xs text-zinc-400">
                         <span dir="ltr" class="font-mono">GitHub_Automation_Studio_Backend/README.md</span>
-                        <span id="docs-sync-status-badge" class="text-[11px] font-mono text-emerald-400"></span>
+                        <button type="button" id="sync-docs-backend-btn" class="bg-apple-blue hover:bg-apple-blueHover text-white text-xs font-medium px-4 py-1.5 rounded-full transition-colors">
+                            שמור שינויים ב-Backend
+                        </button>
                     </div>
-                    <pre id="docs-raw-markdown" dir="ltr" class="bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-xs font-mono text-zinc-200 overflow-x-auto max-h-[540px] leading-relaxed whitespace-pre-wrap"></pre>
+                    <textarea id="docs-raw-markdown" rows="18" dir="ltr" class="w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 text-xs font-mono text-zinc-200 focus:outline-none focus:border-zinc-600 leading-relaxed"></textarea>
                 </div>
 
-                <!-- Styled Visual Architecture Cards -->
-                <div id="docs-visual-cards" class="space-y-5">
-                    <!-- 1. System Overview -->
-                    <div class="bg-zinc-900/75 border border-zinc-800 rounded-3xl p-5 space-y-3">
-                        <div class="flex items-center justify-between gap-2">
-                            <h2 class="text-base font-bold text-white">1. סקירה כללית ותצורת מערכת (System Overview)</h2>
-                            <span dir="ltr" class="text-[11px] font-mono text-zinc-400 bg-zinc-950 border border-zinc-800 px-2.5 py-1 rounded-full">Single-File SPA + Serverless Proxy</span>
-                        </div>
-                        <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed">
-                            <strong class="text-white">AutoGit</strong> היא פלטפורמת Self-Hosted / Serverless להקמה וניהול אוטומטי של אפליקציות Full-Stack על גבי GitHub ו-Cloudflare Workers ללא שרת מסורתי וללא בסיס נתונים חיצוני. המערכת בנויה מקובץ ממשק יחיד (<code dir="ltr" class="font-mono text-sky-300">index.html</code>) המתקשר מול GitHub REST API ומול Cloudflare Worker (<code dir="ltr" class="font-mono text-amber-300">worker.js</code>) הפועל כ-GitHub App Proxy.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                            <div class="bg-zinc-950/90 border border-zinc-800/90 rounded-2xl p-3.5 space-y-1">
-                                <div class="text-[11px] font-mono text-sky-400">Control Plane (Studio)</div>
-                                <div class="text-xs font-semibold text-white">GitHub_Automation_Studio_Frontend</div>
-                                <p class="text-[11px] text-zinc-400 leading-relaxed">ממשק הניהול הראשי (SPA) הכולל את הכדור האינטראקטיבי, ניהול מאגרים, כינויים, פאלטות ודיאגנוסטיקה.</p>
-                            </div>
-                            <div class="bg-zinc-950/90 border border-zinc-800/90 rounded-2xl p-3.5 space-y-1">
-                                <div class="text-[11px] font-mono text-amber-400">Private State Store</div>
-                                <div class="text-xs font-semibold text-white">GitHub_Automation_Studio_Backend</div>
-                                <p class="text-[11px] text-zinc-400 leading-relaxed">מאגר פרטי השומר את <code dir="ltr" class="font-mono text-zinc-300">.studio-config.json</code> (כתובת Worker, תבניות, פאלטות וכינויי מאגרים) ואת <code dir="ltr" class="font-mono text-zinc-300">README.md</code>.</p>
-                            </div>
-                            <div class="bg-zinc-950/90 border border-zinc-800/90 rounded-2xl p-3.5 space-y-1">
-                                <div class="text-[11px] font-mono text-emerald-400">Provisioned App Pair</div>
-                                <div class="text-xs font-semibold text-white">{slug}_Backend + {slug}_Frontend</div>
-                                <p class="text-[11px] text-zinc-400 leading-relaxed">כל אפליקציה מוקמת כזוג מאגרים: פרטי (<code dir="ltr" class="font-mono">data.json</code> כ-DB) ופומבי (GitHub Pages עם <code dir="ltr" class="font-mono">SALTED_VAULT</code> מוצפן).</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 2. Full-Stack Provisioning Pipeline -->
-                    <div class="bg-zinc-900/75 border border-zinc-800 rounded-3xl p-5 space-y-3">
-                        <h2 class="text-base font-bold text-white">2. תהליך הקמת אפליקציה (Hybrid Provisioning Pipeline)</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                            <div class="bg-zinc-950/80 border border-zinc-800 rounded-2xl p-3.5 space-y-1.5">
-                                <div class="font-semibold text-sky-300">שלב א׳ — זיהוי, מזהה וגזירת מפתח (Slug & SHA-256)</div>
-                                <p class="text-zinc-400 leading-relaxed">המשתמש מזין סיסמת אפליקציה. המערכת מייצרת מזהה אקראי בן 11 תווים (<code dir="ltr" class="font-mono text-zinc-300">{slug}</code>) ומחשבת חתימת <code dir="ltr" class="font-mono text-zinc-300">SHA-256("{owner}/{slug}::{password}")</code>.</p>
-                            </div>
-                            <div class="bg-zinc-950/80 border border-zinc-800 rounded-2xl p-3.5 space-y-1.5">
-                                <div class="font-semibold text-amber-300">שלב ב׳ — שכפול עץ אטומי (Atomic Git Tree Clone)</div>
-                                <p class="text-zinc-400 leading-relaxed">ה-Worker מנפיק Installation Token קצר-מועד וקורא רקורסיבית את עץ הקבצים מ-<code dir="ltr" class="font-mono text-zinc-300">_Template_Backend</code> ומ-<code dir="ltr" class="font-mono text-zinc-300">_Template_Frontend</code>, ויוצר Commit יחיד נקי בכל מאגר.</p>
-                            </div>
-                            <div class="bg-zinc-950/80 border border-zinc-800 rounded-2xl p-3.5 space-y-1.5">
-                                <div class="font-semibold text-emerald-300">שלב ג׳ — הצפנת קצה-לקצה (PBKDF2 + AES-GCM)</div>
-                                <p class="text-zinc-400 leading-relaxed">כתובת ה-API של ה-Backend (<code dir="ltr" class="font-mono text-zinc-300">https://{worker}/{owner}/{slug}_Backend</code>) מוצפנת בדפדפן באמצעות <code dir="ltr" class="font-mono text-zinc-300">PBKDF2 (100,000 iterations) + AES-GCM 256-bit</code> ומוזרקת לתוך <code dir="ltr" class="font-mono text-zinc-300">SALTED_VAULT</code> ב-<code dir="ltr" class="font-mono text-zinc-300">index.html</code>.</p>
-                            </div>
-                            <div class="bg-zinc-950/80 border border-zinc-800 rounded-2xl p-3.5 space-y-1.5">
-                                <div class="font-semibold text-purple-300">שלב ד׳ — פריסה אוטומטית (GitHub Pages)</div>
-                                <p class="text-zinc-400 leading-relaxed">לאחר השהיית Jitter למניעת Rate-Limit, המערכת מפעילה אוטומטית GitHub Pages על ענף <code dir="ltr" class="font-mono text-zinc-300">main</code> עבור מאגר ה-Frontend ומאמתת זמינות חיה (<code dir="ltr" class="font-mono text-emerald-400">200 OK</code>).</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. Cloudflare Worker API & Configuration Schema -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-zinc-900/75 border border-zinc-800 rounded-3xl p-5 space-y-3">
-                            <h2 class="text-base font-bold text-white">3. מסלולי Cloudflare Worker API</h2>
-                            <div dir="ltr" class="space-y-2 text-xs font-mono">
-                                <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-2.5">
-                                    <span class="text-emerald-400 font-semibold">GET /ping</span>
-                                    <div class="text-[11px] text-zinc-400 mt-0.5">בדיקת תקינות השרת והחזרת <code class="text-zinc-300">cfRay</code>.</div>
-                                </div>
-                                <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-2.5">
-                                    <span class="text-emerald-400 font-semibold">GET /gh-app-status/:owner</span>
-                                    <div class="text-[11px] text-zinc-400 mt-0.5">אימות התקנת ה-GitHub App ושליפת <code class="text-zinc-300">installationId</code>.</div>
-                                </div>
-                                <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-2.5">
-                                    <span class="text-sky-400 font-semibold">POST /gh-clone-tree</span>
-                                    <div class="text-[11px] text-zinc-400 mt-0.5">שכפול אטומי של מאגרי תבנית דרך Git Trees API.</div>
-                                </div>
-                                <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-2.5">
-                                    <span class="text-amber-400 font-semibold">GET & POST /:owner/:repo</span>
-                                    <div class="text-[11px] text-zinc-400 mt-0.5">קריאה וכתיבה ישירה של <code class="text-zinc-300">data.json</code> במאגר הפרטי עם Scoped Token.</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-zinc-900/75 border border-zinc-800 rounded-3xl p-5 space-y-3">
-                            <h2 class="text-base font-bold text-white">4. תצורות ומצבי המערכת (Modes & Config)</h2>
-                            <ul class="space-y-2 text-xs text-zinc-300 leading-relaxed">
-                                <li class="bg-zinc-950 border border-zinc-800 rounded-xl p-2.5">
-                                    <strong class="text-white">מצב אורח / נעול (<code dir="ltr" class="font-mono text-zinc-400">initial / awake</code>):</strong> כל הטאבים והגדרות התשתית מטושטשים (<code dir="ltr" class="font-mono">blur-md</code>) וה-PAT אינו נשמר בשרת. לחיצה על הכדור פותחת הזנת טוקן מהירה.
-                                </li>
-                                <li class="bg-zinc-950 border border-zinc-800 rounded-xl p-2.5">
-                                    <strong class="text-white">מצב מחובר (<code dir="ltr" class="font-mono text-sky-400">ready / building / success / error</code>):</strong> סנכרון דו-כיווני מול <code dir="ltr" class="font-mono text-zinc-300">.studio-config.json</code> — כולל פאלטות צבעים מותאמות, כינויי פרויקטים (<code dir="ltr" class="font-mono text-zinc-300">repoAliases</code>) וכתובת Worker.
-                                </li>
-                                <li class="bg-zinc-950 border border-zinc-800 rounded-xl p-2.5">
-                                    <strong class="text-white">ניהול מאגרים חכם:</strong> בדיקת סטטוס חי (<code dir="ltr" class="font-mono text-emerald-400">200</code> / <code dir="ltr" class="font-mono text-red-400">404</code>) עם מיני-כדור, עריכת <code dir="ltr" class="font-mono text-zinc-300">data.json</code> ישירה, העתקת סניפט Salted ל-AI, ומחיקת מאגר בודד או זוג מלא.
-                                </li>
-                            </ul>
-                        </div>
+                <!-- Dynamically Rendered Markdown Container from Backend -->
+                <div id="docs-rendered-container" class="space-y-4">
+                    <div class="text-center py-10 text-xs text-zinc-500 bg-zinc-900/50 rounded-2xl border border-dashed border-zinc-800">
+                        טוען תיעוד מתוך GitHub_Automation_Studio_Backend/README.md...
                     </div>
                 </div>
             </div>
@@ -572,16 +487,16 @@
             const docsHeaderSubtitle = document.getElementById('docs-header-subtitle');
             const docsActionsContainer = document.getElementById('docs-actions-container');
             const docsContentContainer = document.getElementById('docs-content-container');
+            const refreshDocsBtn = document.getElementById('refresh-docs-btn');
             const toggleDocsRawBtn = document.getElementById('toggle-docs-raw-btn');
             const copyDocsMdBtn = document.getElementById('copy-docs-md-btn');
             const syncDocsBackendBtn = document.getElementById('sync-docs-backend-btn');
             const docsRawWrapper = document.getElementById('docs-raw-wrapper');
             const docsRawMarkdown = document.getElementById('docs-raw-markdown');
-            const docsVisualCards = document.getElementById('docs-visual-cards');
+            const docsRenderedContainer = document.getElementById('docs-rendered-container');
             const docsSyncStatusBadge = document.getElementById('docs-sync-status-badge');
-
-            const deleteRepoModal = document.getElementById('delete-repo-modal');
-            const deleteModalRepoName = document.getElementById('delete-modal-repo-name');
+            let loadedBackendReadmeMarkdown = '';
+            let loadedBackendReadmeSha = '';
             const cancelDeleteRepoBtn = document.getElementById('cancel-delete-repo-btn');
             const confirmDeleteRepoBtn = document.getElementById('confirm-delete-repo-btn');
             const confirmDeletePairBtn = document.getElementById('confirm-delete-pair-btn');
@@ -909,7 +824,7 @@
                     if (isLoggedOut) {
                         docsHeaderTitle.innerHTML = loginIconHtml;
                     } else {
-                        docsHeaderTitle.textContent = 'Docs — מדריך ארכיטקטורה (README.md)';
+                        docsHeaderTitle.textContent = 'Docs (README.md)';
                     }
                 }
                 if (docsHeaderSubtitle) {
@@ -931,23 +846,278 @@
                 hamburgerMenuBtn.setAttribute('aria-expanded', String(shouldOpen));
                 if (hamburgerIconOpen) hamburgerIconOpen.classList.toggle('hidden', shouldOpen);
                 if (hamburgerIconClose) hamburgerIconClose.classList.toggle('hidden', !shouldOpen);
-                if (shouldOpen) {
-                    syncSettingsBlurState();
+            }
+            function escapeHtmlText(str = '') {
+                return String(str || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+            }
+
+            function formatInlineMarkdown(text = '') {
+                let html = escapeHtmlText(text);
+                html = html.replace(/`([^`]+)`/g, '<code dir="ltr" class="font-mono text-[11px] bg-zinc-950 text-sky-300 border border-zinc-800/90 px-1.5 py-0.5 rounded-md">$1</code>');
+                html = html.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
+                html = html.replace(/\*([^*]+)\*/g, '<em class="text-zinc-200">$1</em>');
+                return html;
+            }
+
+            function renderMarkdownToStyledCards(mdText = '') {
+                if (!docsRenderedContainer) return;
+                const cleanMd = String(mdText || '').trim();
+                if (!cleanMd) {
+                    docsRenderedContainer.innerHTML = `<div class="text-center py-10 text-xs text-zinc-500 bg-zinc-900/50 rounded-2xl border border-dashed border-zinc-800">הקובץ README.md ריק ב-Backend. לחץ על "ערוך Markdown" כדי לכתוב תיעוד.</div>`;
+                    return;
+                }
+
+                const lines = cleanMd.split(/\r?\n/);
+                const sections = [];
+                let currentSection = { title: '', blocks: [] };
+                let inCodeBlock = false;
+                let codeLang = '';
+                let codeLines = [];
+                let tableLines = [];
+
+                const flushTable = () => {
+                    if (!tableLines.length) return;
+                    const rows = tableLines
+                        .filter((l) => !/^\|?\s*[-:| ]+\s*\|?$/.test(l))
+                        .map((l) => l.replace(/^\|/, '').replace(/\|$/, '').split('|').map((c) => c.trim()));
+                    if (rows.length) {
+                        const headerCells = rows[0].map((c) => `<th class="px-3 py-2 text-left text-[11px] font-mono text-zinc-300 bg-zinc-950 border-b border-zinc-800">${formatInlineMarkdown(c)}</th>`).join('');
+                        const bodyRows = rows.slice(1).map((r) => `<tr>${r.map((c) => `<td class="px-3 py-2 text-xs text-zinc-300 border-b border-zinc-800/60">${formatInlineMarkdown(c)}</td>`).join('')}</tr>`).join('');
+                        currentSection.blocks.push(`
+                            <div dir="ltr" class="overflow-x-auto rounded-2xl border border-zinc-800 bg-zinc-950/80 my-2">
+                                <table class="w-full border-collapse">
+                                    <thead><tr>${headerCells}</tr></thead>
+                                    <tbody>${bodyRows}</tbody>
+                                </table>
+                            </div>
+                        `);
+                    }
+                    tableLines = [];
+                };
+
+                for (const line of lines) {
+                    if (line.trim().startsWith('```')) {
+                        flushTable();
+                        if (!inCodeBlock) {
+                            inCodeBlock = true;
+                            codeLang = line.trim().slice(3).trim();
+                            codeLines = [];
+                        } else {
+                            inCodeBlock = false;
+                            currentSection.blocks.push(`
+                                <pre dir="ltr" class="bg-zinc-950 border border-zinc-800 rounded-2xl p-3.5 text-xs font-mono text-zinc-200 overflow-x-auto leading-relaxed my-2">${escapeHtmlText(codeLines.join('\n'))}</pre>
+                            `);
+                            codeLines = [];
+                        }
+                        continue;
+                    }
+                    if (inCodeBlock) {
+                        codeLines.push(line);
+                        continue;
+                    }
+                    if (line.trim().startsWith('|') && line.trim().endsWith('|')) {
+                        tableLines.push(line.trim());
+                        continue;
+                    } else {
+                        flushTable();
+                    }
+
+                    if (/^##\s+/.test(line)) {
+                        if (currentSection.title || currentSection.blocks.length) {
+                            sections.push(currentSection);
+                        }
+                        currentSection = { title: line.replace(/^##\s+/, '').trim(), blocks: [] };
+                    } else if (/^#\s+/.test(line)) {
+                        if (currentSection.title || currentSection.blocks.length) {
+                            sections.push(currentSection);
+                        }
+                        currentSection = { title: line.replace(/^#\s+/, '').trim(), isMainTitle: true, blocks: [] };
+                    } else if (/^###\s+/.test(line)) {
+                        currentSection.blocks.push(`<h3 class="text-xs sm:text-sm font-semibold text-sky-300 pt-2">${formatInlineMarkdown(line.replace(/^###\s+/, ''))}</h3>`);
+                    } else if (/^>\s+/.test(line)) {
+                        currentSection.blocks.push(`<blockquote class="border-r-2 border-sky-500/60 pr-3 py-1 text-xs text-zinc-300 bg-zinc-950/60 rounded-l-xl">${formatInlineMarkdown(line.replace(/^>\s+/, ''))}</blockquote>`);
+                    } else if (/^[-*]\s+/.test(line.trim())) {
+                        currentSection.blocks.push(`<div class="flex items-start gap-2 text-xs text-zinc-300 leading-relaxed"><span class="text-sky-400 mt-0.5">•</span><span>${formatInlineMarkdown(line.trim().replace(/^[-*]\s+/, ''))}</span></div>`);
+                    } else if (/^\d+\.\s+/.test(line.trim())) {
+                        const num = line.trim().match(/^(\d+\.)/)[1];
+                        const rest = line.trim().replace(/^\d+\.\s+/, '');
+                        currentSection.blocks.push(`<div class="flex items-start gap-2 text-xs text-zinc-300 leading-relaxed"><span dir="ltr" class="font-mono text-sky-400 shrink-0">${num}</span><span>${formatInlineMarkdown(rest)}</span></div>`);
+                    } else if (/^---+$/.test(line.trim())) {
+                        // Card boundary handled by section cards
+                    } else if (line.trim()) {
+                        currentSection.blocks.push(`<p class="text-xs sm:text-sm text-zinc-300 leading-relaxed">${formatInlineMarkdown(line)}</p>`);
+                    }
+                }
+                flushTable();
+                if (currentSection.title || currentSection.blocks.length) {
+                    sections.push(currentSection);
+                }
+
+                docsRenderedContainer.innerHTML = sections.map((sec) => `
+                    <div class="bg-zinc-900/75 border border-zinc-800 rounded-3xl p-5 space-y-2.5">
+                        ${sec.title ? `<h2 class="${sec.isMainTitle ? 'text-base sm:text-lg' : 'text-sm sm:text-base'} font-bold text-white border-b border-zinc-800/80 pb-2.5">${formatInlineMarkdown(sec.title)}</h2>` : ''}
+                        <div class="space-y-2">${sec.blocks.join('')}</div>
+                    </div>
+                `).join('');
+            }
+
+            async function loadArchitectureReadmeFromBackend(showSuccessToast = false) {
+                const token = (githubTokenInput?.value || localStorage.getItem('gh_automation_pat') || '').trim();
+                if (!token || !authenticatedOwner) return '';
+
+                if (docsSyncStatusBadge) {
+                    docsSyncStatusBadge.textContent = 'טוען מה-Backend...';
+                }
+
+                try {
+                    const fileUrl = `https://api.github.com/repos/${encodeURIComponent(authenticatedOwner)}/${STUDIO_PRIVATE_CONFIG_REPO}/contents/README.md?_t=${Date.now()}`;
+                    const res = await fetch(fileUrl, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Accept': 'application/vnd.github+json'
+                        },
+                        cache: 'no-store'
+                    });
+
+                    if (res.status === 404) {
+                        loadedBackendReadmeMarkdown = '';
+                        loadedBackendReadmeSha = '';
+                        if (docsRawMarkdown) docsRawMarkdown.value = '';
+                        if (docsSyncStatusBadge) docsSyncStatusBadge.textContent = 'README.md לא נמצא ב-Backend';
+                        renderMarkdownToStyledCards('');
+                        return '';
+                    }
+
+                    if (!res.ok) {
+                        throw new Error(`HTTP ${res.status}`);
+                    }
+
+                    const data = await res.json();
+                    loadedBackendReadmeSha = data.sha || '';
+                    const bin = atob(String(data.content || '').replace(/\s+/g, ''));
+                    const bytes = new Uint8Array(bin.length);
+                    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+                    loadedBackendReadmeMarkdown = new TextDecoder('utf-8').decode(bytes);
+
+                    if (docsRawMarkdown) docsRawMarkdown.value = loadedBackendReadmeMarkdown;
+                    renderMarkdownToStyledCards(loadedBackendReadmeMarkdown);
+
+                    if (docsSyncStatusBadge) {
+                        docsSyncStatusBadge.textContent = `נטען מ-Backend (${new Date().toLocaleTimeString('he-IL')})`;
+                    }
+                    if (showSuccessToast) {
+                        showToast('README.md נמשך בהצלחה מה-Backend', 'success');
+                    }
+                    return loadedBackendReadmeMarkdown;
+                } catch (err) {
+                    if (docsSyncStatusBadge) {
+                        docsSyncStatusBadge.textContent = 'שגיאה בטעינה';
+                    }
+                    addDiagnosticLog('error', 'Failed Loading README.md from Backend Repo', {
+                        message: err?.message || String(err)
+                    });
+                    if (showSuccessToast) {
+                        showToast(`שגיאה בטעינת README.md: ${err?.message || err}`, 'error');
+                    }
+                    return '';
                 }
             }
 
-            if (hamburgerLoggedOutOverlay) {
-                hamburgerLoggedOutOverlay.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    setHamburgerMenuOpen(false);
-                    switchActiveTab('create');
-                    isAppAwake = true;
-                    lastAwakenTimestamp = Date.now();
-                    updateSphereState('awake');
-                    if (appHeader) {
-                        appHeader.classList.remove('blur-md', 'opacity-40', 'pointer-events-none', 'select-none');
+            async function saveArchitectureReadmeToBackend(markdownText) {
+                const token = (githubTokenInput?.value || localStorage.getItem('gh_automation_pat') || '').trim();
+                if (!token || !authenticatedOwner) {
+                    showToast('יש להתחבר לפני שמירת README.md ב-Backend', 'error');
+                    return false;
+                }
+                const cleanText = String(markdownText || '');
+                try {
+                    const fileUrl = `https://api.github.com/repos/${encodeURIComponent(authenticatedOwner)}/${STUDIO_PRIVATE_CONFIG_REPO}/contents/README.md`;
+                    const headers = {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github+json',
+                        'Content-Type': 'application/json'
+                    };
+
+                    let sha = loadedBackendReadmeSha;
+                    if (!sha) {
+                        const getRes = await fetch(`${fileUrl}?_t=${Date.now()}`, { headers });
+                        if (getRes.ok) {
+                            const existing = await getRes.json().catch(() => ({}));
+                            sha = existing.sha || '';
+                        }
                     }
-                    openQuickTokenPopoverForApiKey();
+
+                    const utf8Bytes = new TextEncoder().encode(cleanText);
+                    let binary = '';
+                    utf8Bytes.forEach((b) => { binary += String.fromCharCode(b); });
+
+                    const putRes = await fetch(fileUrl, {
+                        method: 'PUT',
+                        headers,
+                        body: JSON.stringify({
+                            message: 'Update README.md from AutoGit Docs tab',
+                            content: btoa(binary),
+                            ...(sha ? { sha } : {})
+                        })
+                    });
+                    const putData = await putRes.json().catch(() => ({}));
+                    if (!putRes.ok) {
+                        throw new Error(putData.message || `HTTP ${putRes.status}`);
+                    }
+
+                    loadedBackendReadmeMarkdown = cleanText;
+                    loadedBackendReadmeSha = putData?.content?.sha || sha;
+                    renderMarkdownToStyledCards(loadedBackendReadmeMarkdown);
+
+                    if (docsSyncStatusBadge) {
+                        docsSyncStatusBadge.textContent = `נשמר ב-Backend (${new Date().toLocaleTimeString('he-IL')}) ✓`;
+                    }
+                    showToast('README.md נשמר בהצלחה ב-Backend', 'success');
+                    return true;
+                } catch (err) {
+                    addDiagnosticLog('error', 'Failed Saving README.md to Backend Repo', {
+                        message: err?.message || String(err)
+                    });
+                    showToast(`שגיאה בשמירת README.md: ${err?.message || err}`, 'error');
+                    return false;
+                }
+            }
+
+            if (refreshDocsBtn) {
+                refreshDocsBtn.addEventListener('click', () => {
+                    loadArchitectureReadmeFromBackend(true);
+                });
+            }
+
+            if (toggleDocsRawBtn) {
+                toggleDocsRawBtn.addEventListener('click', () => {
+                    if (docsRawMarkdown && !docsRawMarkdown.value && loadedBackendReadmeMarkdown) {
+                        docsRawMarkdown.value = loadedBackendReadmeMarkdown;
+                    }
+                    const showRaw = docsRawWrapper?.classList.contains('hidden');
+                    if (docsRawWrapper) docsRawWrapper.classList.toggle('hidden', !showRaw);
+                    if (docsRenderedContainer) docsRenderedContainer.classList.toggle('hidden', showRaw);
+                    toggleDocsRawBtn.textContent = showRaw ? 'הצג תצוגה מעוצבת' : 'ערוך Markdown';
+                });
+            }
+
+            if (copyDocsMdBtn) {
+                copyDocsMdBtn.addEventListener('click', async () => {
+                    const md = loadedBackendReadmeMarkdown || await loadArchitectureReadmeFromBackend(false);
+                    if (!md) {
+                        showToast('אין תוכן README.md להעתקה', 'error');
+                        return;
+                    }
+                    copyTextToClipboard(md, 'מסמך ה-README.md מה-Backend הועתק ללוח');
+                });
+            }
+
+            if (syncDocsBackendBtn) {
+                syncDocsBackendBtn.addEventListener('click', () => {
+                    saveArchitectureReadmeToBackend(docsRawMarkdown?.value || '');
                 });
             }
 
@@ -976,8 +1146,8 @@
                 if (tabName === 'logs') {
                     renderDiagnosticLogs();
                 }
-                if (tabName === 'docs') {
-                    renderDocsMarkdownPreview();
+                if (tabName === 'docs' && authenticatedOwner) {
+                    loadArchitectureReadmeFromBackend(false);
                 }
             }
 
@@ -2061,201 +2231,6 @@
                 });
             }
 
-            function buildStudioArchitectureReadmeMarkdown() {
-                const ownerDisplay = authenticatedOwner || '<OWNER>';
-                const workerDisplay = (workerBaseUrlInput?.value || localStorage.getItem('gh_worker_base_url') || 'https://<your-worker>.workers.dev').trim();
-                const backendTplDisplay = (templateRepoInput?.value || '_Template_Backend').trim();
-                const frontendTplDisplay = (frontendTemplateRepoInput?.value || '_Template_Frontend').trim();
-
-                return [
-                    '# AutoGit — Serverless Full-Stack Automation Studio',
-                    '',
-                    '> **AI System Context & Architecture Specification**',
-                    '> This document describes the exact architecture, runtime configurations, security model, repository topology, and API contracts of **AutoGit** so any AI assistant can understand, extend, or integrate with the platform without breaking existing invariants.',
-                    '',
-                    '---',
-                    '',
-                    '## 1. High-Level Architecture & Topology',
-                    '',
-                    '**AutoGit** is a zero-server, single-file Single Page Application (`index.html`) paired with a stateless Cloudflare Worker (`worker.js`) acting as a GitHub App proxy. It automates the creation, encryption, deployment, and data persistence of full-stack web applications using GitHub repositories as both hosting (GitHub Pages) and JSON document storage (`data.json`).',
-                    '',
-                    '### Core Repositories in Account (`' + ownerDisplay + '`)',
-                    '| Repository | Visibility | Role |',
-                    '| :--- | :--- | :--- |',
-                    '| `GitHub_Automation_Studio_Frontend` | `PUBLIC` | Hosts the AutoGit Studio UI (`index.html`) on GitHub Pages. |',
-                    '| `GitHub_Automation_Studio_Backend` | `PRIVATE` | Stores `.studio-config.json` (Worker URL, custom sphere palettes, repo aliases, template names) and this `README.md`. |',
-                    '| `' + backendTplDisplay + '` | `PRIVATE` | Source template cloned for every new app backend (contains `data.json`). |',
-                    '| `' + frontendTplDisplay + '` | `PUBLIC` | Source template cloned for every new app frontend (contains `SALTED_VAULT` placeholder). |',
-                    '| `{slug}_Backend` | `PRIVATE` | Provisioned per-app private JSON database repository (`data.json`). |',
-                    '| `{slug}_Frontend` | `PUBLIC` | Provisioned per-app public web frontend hosted at `https://' + ownerDisplay.toLowerCase() + '.github.io/{slug}_Frontend/`. |',
-                    '',
-                    '---',
-                    '',
-                    '## 2. Application Modes & UI States',
-                    '',
-                    '1. **Locked / Guest Mode (`initial` / `awake`)**:',
-                    '   - All management tabs (`ניהול מאגרים`, `הגדרות תשתית`, `לוגים`, `Docs`) are blurred (`blur-md`) and non-interactive.',
-                    '   - Tapping the central 3D Liquid Sphere awakens the UI and opens a quick GitHub Personal Access Token (PAT) input.',
-                    '   - The PAT is stored strictly client-side in `localStorage` (`gh_automation_pat`) and is never written to any repository.',
-                    '2. **Authenticated Studio Mode (`ready` / `building` / `success` / `error`)**:',
-                    '   - Upon verifying `GET https://api.github.com/user`, AutoGit loads `.studio-config.json` from `' + ownerDisplay + '/GitHub_Automation_Studio_Backend`.',
-                    '   - Custom Sphere & Header palettes (`SPHERE_PALETTES`) and human-readable project aliases (`repoAliases`) are hydrated and auto-synced back to `.studio-config.json` on change.',
-                    '   - Live tab favicon and PWA icons (`AutoGit`) are dynamically rendered from the Sphere canvas.',
-                    '',
-                    '---',
-                    '',
-                    '## 3. Full-Stack Provisioning Pipeline',
-                    '',
-                    'When an authenticated user taps the Sphere in `ready` state and enters an **App Password**:',
-                    '',
-                    '1. **Slug & Deterministic Salt Generation**:',
-                    '   - Generates an 11-character URL-safe base64 slug (`{slug}`).',
-                    '   - Computes `saltedValue = SHA-256("{owner}/{slug}::{appPassword}")`.',
-                    '2. **Atomic Git Tree Cloning (`POST ' + workerDisplay + '/gh-clone-tree`)**:',
-                    '   - Creates `{slug}_Backend` (`private: true`) and `{slug}_Frontend` (`private: false`).',
-                    '   - The Cloudflare Worker mints a GitHub App Installation Token, reads the recursive Git tree of `' + backendTplDisplay + '` and `' + frontendTplDisplay + '`, and commits all blobs atomically.',
-                    '3. **Zero-Knowledge Endpoint Encryption (`SALTED_VAULT`)**:',
-                    '   - In the browser, the backend endpoint `https://<worker>/{owner}/{slug}_Backend` is encrypted with **PBKDF2** (`100,000` iterations, `SHA-256`, random 16-byte salt) + **AES-GCM** (`256-bit`, random 12-byte IV).',
-                    '   - The resulting `{ salt, iv, cipher }` JSON object replaces `const SALTED_VAULT = ...` inside `{slug}_Frontend/index.html`. No plaintext Worker URL or GitHub owner is exposed in the public frontend.',
-                    '4. **GitHub Pages Activation & Live Health Check**:',
-                    '   - Enables GitHub Pages (`branch: "main"`, `path: "/"`) on `{slug}_Frontend` after a randomized jitter delay.',
-                    '   - Polls the live GitHub Pages URL (`200 OK` vs `404`) and displays a live green/red mini-sphere indicator in the Repositories Manager.',
-                    '',
-                    '---',
-                    '',
-                    '## 4. Cloudflare Worker Proxy API (`' + workerDisplay + '`)',
-                    '',
-                    'The Worker authenticates as a GitHub App (`GH_APP_ID` + `GH_APP_PRIVATE_KEY`) and mints repository-scoped installation tokens on demand:',
-                    '',
-                    '- **`GET /ping`**: Health check returning `{ ok: true, mode: "github-app-proxy", cfRay }`.',
-                    '- **`GET /gh-app-status/:owner`**: Verifies whether the GitHub App is installed on `:owner` and returns `installationId`.',
-                    '- **`POST /gh-provision-template` | `/gh-clone-tree` | `/gh-generate`**: Atomically clones a template repository tree into a target repository.',
-                    '- **`GET /:owner/:repo`**: Fetches and decodes `data.json` from `:owner/:repo` (returns `[]` if `404`).',
-                    '- **`POST /:owner/:repo`**: Writes formatted JSON body to `data.json` in `:owner/:repo` using a scoped `{ contents: "write" }` token.',
-                    '',
-                    '---',
-                    '',
-                    '## 5. Rules for AI Assistants Modifying or Integrating with AutoGit',
-                    '',
-                    '- **Single-File Frontend Constraint**: Keep all HTML, Tailwind styling, and JavaScript inside `index.html` without external local asset dependencies.',
-                    '- **Never Persist Secrets in Git**: Never commit the user\'s GitHub PAT or plaintext app passwords into `.studio-config.json` or any repository.',
-                    '- **Preserve `SALTED_VAULT` Contract**: Any frontend template must keep `const SALTED_VAULT = {"salt":"PLACEHOLDER","iv":"PLACEHOLDER","cipher":"PLACEHOLDER"};` so AutoGit can inject the AES-GCM encrypted backend URL during provisioning.',
-                    '- **Use Aliases Instead of Renaming Repos**: Renaming provisioned repositories breaks `SALTED_VAULT` ciphertexts and GitHub Pages URLs; always use `repoAliases` in `.studio-config.json` for human-readable labels.',
-                    ''
-                ].join('\n');
-            }
-
-            async function syncArchitectureReadmeToBackend(silent = false) {
-                const token = (githubTokenInput?.value || localStorage.getItem('gh_automation_pat') || '').trim();
-                if (!token || !authenticatedOwner) {
-                    if (!silent) showToast('יש להתחבר לפני שמירת README.md ב-Backend', 'error');
-                    return false;
-                }
-                const markdownContent = buildStudioArchitectureReadmeMarkdown();
-                if (docsRawMarkdown) docsRawMarkdown.textContent = markdownContent;
-
-                try {
-                    const fileUrl = `https://api.github.com/repos/${encodeURIComponent(authenticatedOwner)}/${STUDIO_PRIVATE_CONFIG_REPO}/contents/README.md`;
-                    const headers = {
-                        'Authorization': `Bearer ${token}`,
-                        'Accept': 'application/vnd.github+json',
-                        'Content-Type': 'application/json'
-                    };
-                    let sha = undefined;
-                    let existingDecoded = '';
-                    const getRes = await fetch(`${fileUrl}?_t=${Date.now()}`, { headers });
-                    if (getRes.ok) {
-                        const existing = await getRes.json().catch(() => ({}));
-                        sha = existing.sha;
-                        if (existing.content) {
-                            try {
-                                const bin = atob(String(existing.content).replace(/\s+/g, ''));
-                                const bytes = new Uint8Array(bin.length);
-                                for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-                                existingDecoded = new TextDecoder('utf-8').decode(bytes);
-                            } catch (_) {}
-                        }
-                    }
-
-                    // Skip redundant commit if backend README.md is already identical
-                    if (existingDecoded.trim() === markdownContent.trim()) {
-                        if (docsSyncStatusBadge) {
-                            docsSyncStatusBadge.textContent = 'מסונכרן ב-Backend ✓';
-                        }
-                        if (!silent) {
-                            showToast('README.md כבר מעודכן ב-GitHub_Automation_Studio_Backend', 'success');
-                        }
-                        return true;
-                    }
-
-                    const utf8Bytes = new TextEncoder().encode(markdownContent);
-                    let binary = '';
-                    utf8Bytes.forEach((b) => { binary += String.fromCharCode(b); });
-
-                    const putRes = await fetch(fileUrl, {
-                        method: 'PUT',
-                        headers,
-                        body: JSON.stringify({
-                            message: 'Sync AutoGit architecture documentation (README.md)',
-                            content: btoa(binary),
-                            ...(sha ? { sha } : {})
-                        })
-                    });
-                    if (!putRes.ok) {
-                        const errObj = await putRes.json().catch(() => ({}));
-                        throw new Error(errObj.message || `HTTP ${putRes.status}`);
-                    }
-                    if (docsSyncStatusBadge) {
-                        docsSyncStatusBadge.textContent = `נשמר ב-Backend (${new Date().toLocaleTimeString('he-IL')}) ✓`;
-                    }
-                    addDiagnosticLog('success', `Synced README.md to ${authenticatedOwner}/${STUDIO_PRIVATE_CONFIG_REPO}`, {
-                        repo: `${authenticatedOwner}/${STUDIO_PRIVATE_CONFIG_REPO}`,
-                        file: 'README.md',
-                        bytes: utf8Bytes.length
-                    });
-                    if (!silent) {
-                        showToast('README.md נשמר פיזית ב-GitHub_Automation_Studio_Backend', 'success');
-                    }
-                    return true;
-                } catch (err) {
-                    addDiagnosticLog('error', 'Failed Syncing README.md to Backend Repo', {
-                        message: err?.message || String(err)
-                    });
-                    if (!silent) {
-                        showToast(`שגיאה בשמירת README.md: ${err?.message || err}`, 'error');
-                    }
-                    return false;
-                }
-            }
-
-            function renderDocsMarkdownPreview() {
-                if (docsRawMarkdown) {
-                    docsRawMarkdown.textContent = buildStudioArchitectureReadmeMarkdown();
-                }
-            }
-
-            if (toggleDocsRawBtn) {
-                toggleDocsRawBtn.addEventListener('click', () => {
-                    renderDocsMarkdownPreview();
-                    const showRaw = docsRawWrapper?.classList.contains('hidden');
-                    if (docsRawWrapper) docsRawWrapper.classList.toggle('hidden', !showRaw);
-                    if (docsVisualCards) docsVisualCards.classList.toggle('hidden', showRaw);
-                    toggleDocsRawBtn.textContent = showRaw ? 'הצג תצוגה מעוצבת' : 'הצג Markdown גולמי';
-                });
-            }
-
-            if (copyDocsMdBtn) {
-                copyDocsMdBtn.addEventListener('click', () => {
-                    copyTextToClipboard(buildStudioArchitectureReadmeMarkdown(), 'מסמך ה-README.md הועתק ללוח עבור AI');
-                });
-            }
-
-            if (syncDocsBackendBtn) {
-                syncDocsBackendBtn.addEventListener('click', () => {
-                    syncArchitectureReadmeToBackend(false);
-                });
-            }
-
             async function verifyGitHubToken(rawToken) {
                 const token = String(rawToken || '').trim();
                 if (!token) {
@@ -2323,8 +2298,7 @@
                         updateSphereState('ready');
                         checkTenantGitHubAppStatus(activeWorker, authenticatedOwner);
                     }
-                    renderDocsMarkdownPreview();
-                    syncArchitectureReadmeToBackend(true);
+                    loadArchitectureReadmeFromBackend(false);
                     fetchAccountRepositories();
                     return true;
                 } catch (err) {
